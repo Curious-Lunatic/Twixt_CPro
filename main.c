@@ -62,7 +62,7 @@ void welcome(void) {
     printf("     ███         ████      ████      █████████  ███    ███     ███\n");
     printf("\033[0m");
     printf("\n");
-    printf("Commands: a) help      b) show      c) links     d) exit   \n");
+    printf("Commands: a) help      b) show      c) exit   \n");
     printf("\n");
     printf("Press Enter to start playing :D\n");
     printf("\n");
@@ -109,10 +109,6 @@ void play(State *game){
         continue;
         }
     if (strcmp(input,"show")==0){
-        continue;
-        }
-    if (strcmp(input,"links")==0){
-        printlinks(&game->board);
         continue;
         }
     if (!read(input,&column,&row)){
@@ -163,7 +159,6 @@ int main(){
     State game;
     welcome();
     getchar();
-    printf("\n");
     printf("Setting up the board ....\n");
     printf("\n");
     game.current=red;
