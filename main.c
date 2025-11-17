@@ -47,7 +47,6 @@ void help(void){
     printf("\n");
     printf(" help    - Show the help menu\n");
     printf(" show    - Show the board\n");
-    printf(" links   - Show the current links on the board\n");
     printf(" exit    - Exit the game\n");
     printf("\n");
 }
