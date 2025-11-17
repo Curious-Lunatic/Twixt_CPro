@@ -224,13 +224,6 @@ void update(Board *board, Position position, int player){
             p.x=j;
             p.y=i;
             cell = &board->cells[i][j];
-            Peg buffer;
-            if (player == red){
-                buffer = redpeg;
-            }
-            else if (player == blue){
-                buffer = bluepeg;
-            }
             if (player == red && i==0 && j>0 && j<23){
             cell->start[player]=1;
             }
@@ -240,7 +233,7 @@ void update(Board *board, Position position, int player){
             else if (player == red && i==23 && j>0 && j<23){
             cell->end[player]=1;
             }
-            else if (player == red && j==0 && i>0 && i<23){
+            else if (player == blue && j==23 && i>0 && i<23){
             cell->end[player]=1;
                 }
             }
@@ -258,10 +251,10 @@ void update(Board *board, Position position, int player){
                         if(cell->links & (1<<k)){
                             Position next = cell->neigbours[k];
                             if (next.x >=0 && next.y>=0){
-                                Cell *cnext = &board->cells[next.y][next.x];
+                                Cell *cnext= &board->cells[next.y][next.x];
                                 if (!cnext->start[player]){
                                     cnext->start[player]=1;
-                                    flag=1;
+                                    flag =1;
                                 }
                             }
                         }
@@ -282,10 +275,10 @@ void update(Board *board, Position position, int player){
                         if(cell->links & (1<<k)){
                             Position next = cell->neigbours[k];
                             if (next.x >=0 && next.y>=0){
-                                Cell *cnext = &board->cells[next.y][next.x];
+                                Cell *cnext =&board->cells[next.y][next.x];
                                 if (!cnext->end[player]){
                                     cnext->end[player]=1;
-                                    flag=1;
+                                    flag= 1;
                                 }
                             }
                         }
