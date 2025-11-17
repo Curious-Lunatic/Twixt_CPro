@@ -31,5 +31,4 @@ void actionlist(Action *list);
 void addaction(Action *list, int action);
 void removeaction(Action *list, int action);
 int checkaction(Action *list, int action);
-void printlinks(Board *board);
 #endif
