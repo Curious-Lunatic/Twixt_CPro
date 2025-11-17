@@ -13,16 +13,16 @@ int oppdir(int direction){
 }
 
 int samepos(Position a, Position b){
-    return (a.x == b.x && a.y == b.y);
+    return ((a.x == b.x) && (a.y == b.y));
 }
 
 void createboard(Board *board){
-    board->move=0;
-    board->first.x=-1;
-    board->first.y=-1;
-    board->result=open;
-    setcells(board);
-    legalmoves(board);
+board->move=0;
+board->first.x=-1;
+board->first.y=-1;
+board->result=open;
+setcells(board);
+legalmoves(board);
 }
 
 void setcells(Board *board){
@@ -180,7 +180,6 @@ void peg(Board* board, int player, Position positon){
     Cell *cell;
     Position target;
     Cell *ctarget;
-
     cell = viewcell(board,positon);
     if (player == red){
         cell->colour = redpeg;
@@ -188,7 +187,6 @@ void peg(Board* board, int player, Position positon){
     else if (player == blue){
         cell->colour = bluepeg;
     }
-
     for (int i =0; i<8; i++){
         target.x = positon.x + diff[i][0];
         target.y = positon.y + diff[i][1];
@@ -433,79 +431,4 @@ int checkaction(Action *list, int action){
         }
     }
 return 0;
-}
-
-void printlinks(Board* board){
-    Position position;
-    Cell *cell;
-    int rc=0,bc=0;
-
-    printf("\n");
-    printf("=============\n");
-    printf("Current LInks\n");
-    printf("=============\n");
-
-    printf("\n");
-    printf("RED LINKS:\n");
-    for (int i=0; i<24; i++){
-        for (int j=0; j<24; j++){
-            position.x = j;
-            position.y = i;
-            if (offboard(position)){
-                continue;
-            }
-            cell = viewcell(board,position);
-            if (cell->colour == redpeg){
-                for (int k=0; k<8; k++){
-                    if (cell->links & (1<<k)){
-                        Position target = cell->neigbours[k];
-                        if (target.x >= 0 && target.y >=0){
-                            if (position.y < target.y || (position.y == target.y && position.x <target.x)){
-                                printf("  %c%d <==> %c%d\n",'a'+position.x,position.y+1,'a'+target.x,target.y+1);
-                                rc++;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    if (rc==0){
-        printf(" No links yet :( \n");
-    }
-    else{
-        printf(" Total: %d links\n",rc);
-    }
-    printf("\n");
-    printf("BLUE LINKS:\n");
-    for (int i=0; i<24; i++){
-        for (int j=0; j<24; j++){
-            position.x = j;
-            position.y = i;
-            if (offboard(position)){
-                continue;
-            }
-            cell = viewcell(board,position);
-            if (cell->colour == bluepeg){
-                for (int k=0; k<8; k++){
-                    if (cell->links & (1<<k)){
-                        Position target = cell->neigbours[k];
-                        if (target.x >= 0 && target.y >=0){
-                            if (position.y < target.y || (position.y == target.y && position.x <target.x)){
-                                printf("  %c%d <==> %c%d\n",'a'+position.x,position.y+1,'a'+target.x,target.y+1);
-                                bc++;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    if (bc==0){
-        printf(" No links yet :( \n");
-    }
-    else{
-        printf(" Total: %d links\n",bc);
-    }
-printf("\n");
 }
