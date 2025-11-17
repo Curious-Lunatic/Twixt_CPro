@@ -64,6 +64,7 @@ void welcome(void) {
     printf("Commands: a) help      b) show      c) exit   \n");
     printf("\n");
     printf("Press Enter to start playing :D\n");
+    printf("Use chess move like inputs like c9 or d5.\n");
     printf("\n");
 }
 
