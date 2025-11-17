@@ -6,9 +6,9 @@
 #include "defination.h"
 
 int read(char *input, int *column, int *row){
-    char c;
+    char c,d;
     int r;
-    if (sscanf(input," %c%d",&c,&r) != 2){
+    if (sscanf(input," %c%d%c",&c,&r,&d) != 2){
         return 0;
     }
         if (c<'a' || c>'x'){
