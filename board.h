@@ -2,7 +2,6 @@
 #define board_h
 #include "defination.h"
 
-
 void createboard(Board *board);
 void setcells(Board *board);
 void legalmoves(Board *board);
@@ -15,9 +14,10 @@ int reverse(Position position);
 
 Cell* viewcell(Board *board, Position position);
 int linkage(Board *board, Position here, int direction);
+int crosslinkage(Position P1, int D1, Position P2, int D2);
 void peg(Board* board, int player, Position position);
 
-void update(Board *board, Position position, int player);
+void update(Board *board, int player);
 int checkwin(Board* board, int plauer);
 void makemove(Board* board, int player, int action);
 void checkstate(Board* board, int player, Position positon);
@@ -31,4 +31,5 @@ void actionlist(Action *list);
 void addaction(Action *list, int action);
 void removeaction(Action *list, int action);
 int checkaction(Action *list, int action);
+void printlinks(Board *board);
 #endif
