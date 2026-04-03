@@ -6,9 +6,9 @@
 #include "defination.h"
 
 int read(char *input, int *column, int *row){
-    char c,d;
+    char c;
     int r;
-    if (sscanf(input," %c%d%c",&c,&r,&d) != 2){
+    if (sscanf(input," %c%d",&c,&r) != 2){
         return 0;
     }
         if (c<'a' || c>'x'){
@@ -47,6 +47,7 @@ void help(void){
     printf("\n");
     printf(" help    - Show the help menu\n");
     printf(" show    - Show the board\n");
+    printf(" links   - Show the current links on the board\n");
     printf(" exit    - Exit the game\n");
     printf("\n");
 }
@@ -61,10 +62,9 @@ void welcome(void) {
     printf("     ███         ████      ████      █████████  ███    ███     ███\n");
     printf("\033[0m");
     printf("\n");
-    printf("Commands: a) help      b) show      c) exit   \n");
+    printf("Commands: a) help      b) show      c) links     d) exit   \n");
     printf("\n");
     printf("Press Enter to start playing :D\n");
-    printf("Use chess move like inputs like c9 or d5.\n");
     printf("\n");
 }
 
@@ -111,10 +111,14 @@ void play(State *game){
     if (strcmp(input,"show")==0){
         continue;
         }
+    if (strcmp(input,"links")==0){
+        printlinks(&game->board);
+        continue;
+        }
     if (!read(input,&column,&row)){
         printf("Invalid move! Try to put a different move!\n");
-        printf("The letter should be in a-x\n");
-        printf("The number should be from 1-24\n");
+        printf("Columns: a-x\n");
+        printf("Rows: 1-24\n");
         continue;
         }
     positon.x = column;
@@ -123,7 +127,7 @@ void play(State *game){
     legal = legality(&game->board,game->current);
 
     if (!checkaction(legal, action)){
-        printf(" Sorry :(! This Position is not available! Try another one\n");
+        printf(" This Position is not available! Try another one\n");
         printf("\n");
         continue;
         }
@@ -159,6 +163,7 @@ int main(){
     State game;
     welcome();
     getchar();
+    printf("\n");
     printf("Setting up the board ....\n");
     printf("\n");
     game.current=red;
